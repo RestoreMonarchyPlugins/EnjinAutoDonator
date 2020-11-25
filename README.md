@@ -3,7 +3,7 @@ Free and open source Enjin auto donations plugin for Unturned
 **This plugin is sponsored by Rise and RisenHero.net**
 
 Download latest version from [releases](https://github.com/RestoreMonarchyPlugins/EnjinAutoDonator/releases)  
-You can also download WebDonationsToEnjinAutoDonator.zip in the releases that has exec file which can migrate WebDonations config to EnjinAutoDonator easily.
+You can also download `WebDonationsToEnjinAutoDonator.zip` in the releases that has exec file which can migrate WebDonations config to EnjinAutoDonator easily.
 
 ### How it works?
 * Every `RefreshTime` the plugin is downloading `DaysBack` purchases from enjin website. 

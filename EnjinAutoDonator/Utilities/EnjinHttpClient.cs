@@ -22,7 +22,7 @@ namespace EnjinAutoDonator.Utilities
         public EnjinHttpClient()
         {
             ServicePointManager.ServerCertificateValidationCallback = new RemoteCertificateValidationCallback(AcceptAllCertifications);
-            APIUrl = pluginInstance.Configuration.Instance.WebsiteUrl;
+            APIUrl = pluginInstance.Configuration.Instance.WebsiteUrl.Trim('/') + "/api/v1/api.php";
         }
 
         private bool AcceptAllCertifications(object a, X509Certificate b, X509Chain c, SslPolicyErrors d) => true;
@@ -34,6 +34,7 @@ namespace EnjinAutoDonator.Utilities
 
             var request = WebRequest.CreateHttp(APIUrl);
 
+            // without user agent enjin returns Forbidden (403)
             request.UserAgent = "CustomEnjinAPI.Agent";
             request.Method = "POST";
             request.ContentType = "application/json";

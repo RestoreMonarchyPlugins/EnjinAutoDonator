@@ -18,6 +18,7 @@ namespace EnjinAutoDonator
         public int LookDaysBack { get; set; }
         public double RefreshTimeMiliseconds { get; set; }
         public int RequestTimeoutMiliseconds { get; set; }
+        public bool PayUconomyMoneyOnce { get; set; }
 
         public string DatabaseAddress { get; set; }
         public string DatabaseUsername { get; set; }
@@ -28,23 +29,24 @@ namespace EnjinAutoDonator
         public string PurchasesTableName { get; set; }
 
         public string SteamIDIdentifier { get; set; }
-        public ShopItemFeatures[] Features { get; set; }
+        public Package[] Packages { get; set; }
 
 
         public void LoadDefaults()
         {            
             MessageColor = "magenta";
             ServerIdentifier = "PVP1";
-            WebsiteUrl = "http://www.yourwebsite.com/api/v1/api.php";
+            WebsiteUrl = "http://www.yourwebsite.enjin.com/";
             APIKey = "APIKEY";
             PresetId = 248723;
 
             DiscordWebhookUrl = "";
-            DiscordWebhookColor = "";
+            DiscordWebhookColor = "#843da4";
 
             LookDaysBack = 7;
             RefreshTimeMiliseconds = 30000;
             RequestTimeoutMiliseconds = 10000;
+            PayUconomyMoneyOnce = true;
 
             DatabaseAddress = "127.0.0.1";
             DatabaseUsername = "root";
@@ -55,9 +57,9 @@ namespace EnjinAutoDonator
             PurchasesTableName = "FinishedPurchases";
 
             SteamIDIdentifier = "steamID";
-            Features = new ShopItemFeatures[]
+            Packages = new Package[]
             {
-                new ShopItemFeatures()
+                new Package()
                 {
                     EnjinItemId = 123,
                     AddGroups = new string[]

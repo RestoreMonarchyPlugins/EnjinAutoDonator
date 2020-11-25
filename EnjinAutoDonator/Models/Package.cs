@@ -7,7 +7,7 @@ using System.Xml.Serialization;
 
 namespace EnjinAutoDonator.Models
 {
-    public class ShopItemFeatures
+    public class Package
     {
         [XmlAttribute]
         public int EnjinItemId { get; set; }
@@ -18,7 +18,7 @@ namespace EnjinAutoDonator.Models
         public string[] AddGroups { get; set; }
         [XmlArrayItem("GroupID")]
         public string[] RemoveGroups { get; set; }
-        [XmlElement("Command")]
+        [XmlArrayItem("Command")]
         public string[] Commands { get; set; }
         public decimal UconomyMoney { get; set; }        
     }

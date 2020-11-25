@@ -41,7 +41,6 @@ namespace EnjinAutoDonator.Services
         {
             Database.Initialize();
             RefreshTimer.Start();
-            Logger.Log("Purchases service started", ConsoleColor.Yellow);
         }
 
         void OnDestroy()
@@ -68,7 +67,7 @@ namespace EnjinAutoDonator.Services
                     foreach (var item in result["items"].AsJEnumerable())
                     {
                         // skip if item is not operated on this server
-                        if (!pluginInstance.Configuration.Instance.Features.Any(x => x.EnjinItemId == item["item_id"].ToObject<int>()))
+                        if (!pluginInstance.Configuration.Instance.Packages.Any(x => x.EnjinItemId == item["item_id"].ToObject<int>()))
                             continue;
 
                         if (!finishedPurchases.Any(x => x.PurchaseDate == result["purchase_date"].ToObject<int>() && x.ItemId == item["item_id"].ToObject<int>()))
@@ -98,11 +97,13 @@ namespace EnjinAutoDonator.Services
 
         private void ProcessPurchase(JToken item, JToken result)
         {
-            var features = pluginInstance.Configuration.Instance.Features.FirstOrDefault(x => x.EnjinItemId == item["item_id"].ToObject<int>());
+            var features = pluginInstance.Configuration.Instance.Packages.FirstOrDefault(x => x.EnjinItemId == item["item_id"].ToObject<int>());
             if (features == null)
                 return;
 
-            string steamIdStr = item["variables_names"][pluginInstance.Configuration.Instance.SteamIDIdentifier].ToString();
+            bool flag = Database.ContainsPurchase(result["purchase_date"].ToObject<int>(), item["item_id"].ToObject<int>());
+
+            string steamIdStr = item["variables_names"][pluginInstance.Configuration.Instance.SteamIDIdentifier].ToString();            
 
             string steamName = null;
             if (ulong.TryParse(steamIdStr, out ulong steamId))
@@ -117,7 +118,7 @@ namespace EnjinAutoDonator.Services
                     Logger.LogException(e, $"An exception occurated while downloading {steamId} name from Steam");
                 }
 
-                TaskDispatcher.QueueOnMainThread(() => ExecuteFeatures(new RocketPlayer(steamId.ToString(), steamName), features, item["item_name"].ToString()));
+                TaskDispatcher.QueueOnMainThread(() => ExecuteFeatures(new RocketPlayer(steamId.ToString(), steamName), features, item["item_name"].ToString(), flag));
             }
 
             var purchase = new FinishedPurchase()
@@ -131,14 +132,14 @@ namespace EnjinAutoDonator.Services
                 CreateDate = DateTime.UtcNow
             };
 
-            bool flag = Database.ContainsPurchase(purchase.PurchaseDate, purchase.ItemId);
+            
             Database.FinishPurchase(purchase);
 
             if (!flag && !string.IsNullOrEmpty(pluginInstance.Configuration.Instance.DiscordWebhookUrl))
                 DiscordHelper.SendNotification(purchase);
         }
 
-        private void ExecuteFeatures(RocketPlayer player, ShopItemFeatures features, string itemName)
+        private void ExecuteFeatures(RocketPlayer player, Package features, string itemName, bool wasAlready)
         {
             if (features.Commands != null && features.Commands.Length > 0)
             {
@@ -166,13 +167,20 @@ namespace EnjinAutoDonator.Services
 
             if (features.UconomyMoney > 0)
             {
-                if (RocketPlugin.IsDependencyLoaded("Uconomy"))
+                if (pluginInstance.Configuration.Instance.PayUconomyMoneyOnce && wasAlready)
                 {
-                    // using helper to avoid depdency error message in case uconomy not installed
-                    UconomyHelper.PayMoney(player.Id, features.UconomyMoney);
+                    Logger.LogWarning("Uconomy money was already paid, skipping.");
                 } else
                 {
-                    Logger.LogWarning($"Failed to pay {features.UconomyMoney} money to {player.DisplayName} {player.Id}, because Uconomy is not installed");
+                    if (RocketPlugin.IsDependencyLoaded("Uconomy"))
+                    {
+                        // using helper to avoid depdency error message in case uconomy not installed
+                        UconomyHelper.PayMoney(player.Id, features.UconomyMoney);
+                    }
+                    else
+                    {
+                        Logger.LogWarning($"Failed to pay {features.UconomyMoney} money to {player.DisplayName} {player.Id}, because Uconomy is not installed");
+                    }
                 }
             }
 

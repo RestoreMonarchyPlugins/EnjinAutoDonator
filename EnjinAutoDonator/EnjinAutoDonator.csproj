@@ -123,7 +123,7 @@
     <Compile Include="Helpers\UconomyHelper.cs" />
     <Compile Include="Models\Enjin\EnjinRequestBody.cs" />
     <Compile Include="Models\FinishedPurchase.cs" />
-    <Compile Include="Models\ShopItemFeatures.cs" />
+    <Compile Include="Models\Package.cs" />
     <Compile Include="Providers\IPurchasesDatabaseProvider.cs" />
     <Compile Include="Providers\MySQLPurchasesDatabaseProvider.cs" />
     <Compile Include="Services\PurchasesService.cs" />

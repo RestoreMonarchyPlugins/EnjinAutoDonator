@@ -26,7 +26,6 @@ namespace EnjinAutoDonator.Helpers
                 })
             };
 
-            Logger.Log(obj.ToString());
             using (var wc = new WebClient())
             {
                 wc.Headers.Add(HttpRequestHeader.ContentType, "application/json");

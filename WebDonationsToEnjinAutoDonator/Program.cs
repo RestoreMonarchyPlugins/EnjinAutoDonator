@@ -12,7 +12,8 @@ namespace WebDonationsToEnjinAutoDonator
     class Program
     {
         public static Program Instance { get; private set; }
-        
+        public const string Version = "1.0.1";
+
         static void Main(string[] args)
         {
             Instance = new Program();
@@ -42,7 +43,21 @@ namespace WebDonationsToEnjinAutoDonator
                 WebsiteUrl = webDonations.Enjin.websiteUrl,
                 APIKey = webDonations.Enjin.apiKey,
                 PresetId = webDonations.Enjin.presetId,
-                DiscordWebhookUrl = webDonations.discordWebhookURL
+                DiscordWebhookUrl = webDonations.discordWebhookURL,
+                ServerIdentifier = "PVP1",
+                MessageColor = "magenta",
+                LookDaysBack = 7,
+                SteamIDIdentifier = "steamID",
+                DiscordWebhookColor = "#843da4",
+                RefreshTimeMiliseconds = 30000,
+                RequestTimeoutMiliseconds = 10000,
+                PayUconomyMoneyOnce = true,
+                DatabaseAddress = "127.0.0.1",
+                DatabaseName = "unturned",
+                DatabasePort = 3306,
+                DatabaseUsername = "root",
+                DatabasePassword = "password123",
+                PurchasesTableName = "FinishedPurchases"
             };
 
             var packages = new List<Package>();

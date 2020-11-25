@@ -5,6 +5,8 @@ Free and open source Enjin auto donations plugin for Unturned
 Download latest version from [releases](https://github.com/RestoreMonarchyPlugins/EnjinAutoDonator/releases)  
 You can also download `WebDonationsToEnjinAutoDonator.zip` in the releases that has exec file which can migrate WebDonations config to EnjinAutoDonator easily.
 
+Please report bugs and features requests in [issues](https://github.com/RestoreMonarchyPlugins/EnjinAutoDonator/issues)
+
 ### How it works?
 * Every `RefreshTime` the plugin is downloading `DaysBack` purchases from enjin website. 
 * It uses `ServerIdentifier` to check if purchase was already processed on this server. 

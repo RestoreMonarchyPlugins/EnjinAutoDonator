@@ -13,7 +13,7 @@ Free and open source Enjin auto donations plugin for Unturned
 <?xml version="1.0" encoding="utf-8"?>
 <EnjinAutoDonatorConfiguration xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <MessageColor>magenta</MessageColor> <!-- Color of chat messages -->
-  <ServerIdentifier>PVP4</ServerIdentifier> <!-- Any string (max 50 characters) that will be ID of current server -->
+  <ServerIdentifier>PVP1</ServerIdentifier> <!-- Any string (max 50 characters) that will be ID of current server -->
   <WebsiteUrl>http://yourwebsite.enjin.com</WebsiteUrl> <!-- The root url of your Enjin website --> 
   <APIKey>APIKEY</APIKey> <!-- APIKey of your Enjin website -->
   <PresetId>41012001</PresetId> <!-- ID of your Enjin Donation Store -->
@@ -22,6 +22,7 @@ Free and open source Enjin auto donations plugin for Unturned
   <LookDaysBack>9</LookDaysBack> <!-- Number of days back to look for unprocessed purchases -->
   <RefreshTimeMiliseconds>30000</RefreshTimeMiliseconds> <!-- Refresh time of checking for new purchases (in miliseconds) -->
   <RequestTimeoutMiliseconds>10000</RequestTimeoutMiliseconds> <!-- Your enjin site web request timeout -->
+  <PayUconomyMoneyOnce>true</PayUconomyMoneyOnce> <!-- Set this to true if you don't want uconomy to increase player balance on every server -->
   <DatabaseAddress>127.0.0.1</DatabaseAddress> <!-- Your MySQL database address -->
   <DatabaseUsername>root</DatabaseUsername> <!-- Your MySQL database username -->
   <DatabasePassword>password123</DatabasePassword> <!-- Your MySQL database user password -->
@@ -37,7 +38,9 @@ Free and open source Enjin auto donations plugin for Unturned
       <RemoveGroups>
         <GroupID>vip</GroupID> <!-- Rocket permissions group ID to be removed from player -->
       </RemoveGroups>
-      <Command>/airdrop</Command> <!-- Any command to execute, can use variables {steamid} and {steamname} -->
+      <Commands>
+        <Command>/airdrop</Command> <!-- Any command to execute, can use variables {steamid} and {steamname} -->
+      </Commands>
       <UconomyMoney>300</UconomyMoney> <!-- Amount of money to be paid to player via Uconomy, make 0 to not pay any money --> 
     </ShopItemFeatures>
   </Features>

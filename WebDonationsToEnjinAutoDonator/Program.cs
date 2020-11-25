@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Xml;
 using System.Xml.Serialization;
 using static WebDonationsToEnjinAutoDonator.EnjinAutoDonatorConfiguration;
@@ -12,7 +13,7 @@ namespace WebDonationsToEnjinAutoDonator
     class Program
     {
         public static Program Instance { get; private set; }
-        public const string Version = "1.0.1";
+        public const string Version = "v1.0.1";
 
         static void Main(string[] args)
         {
@@ -24,6 +25,7 @@ namespace WebDonationsToEnjinAutoDonator
 
         private void Run()
         {
+            Console.WriteLine($"WebDonationsToEnjinAutoDonator {Version}");
             Console.WriteLine("Write WebDonations configuration file name");
             string fileName = Console.ReadLine();
             string webDonationsPath = Path.Combine(directory, fileName);

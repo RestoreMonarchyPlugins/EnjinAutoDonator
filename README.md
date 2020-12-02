@@ -1,3 +1,5 @@
+<img src="icon.png" height="125" width="125" />
+
 # EnjinAutoDonator
 Free and open source Enjin auto donations plugin for Unturned  
 **This plugin is sponsored by Rise and RisenHero.net**

@@ -37,8 +37,8 @@ You can download `WebDonationsToEnjinAutoDonator.zip` in the releases that has e
   <DatabasePort>3306</DatabasePort> <!-- Your MySQL database port -->
   <PurchasesTableName>FinishedPurchases</PurchasesTableName> <!-- Name of Purchases database table -->
   <SteamIDIdentifier>steamID</SteamIDIdentifier> <!-- The variable name for steam ID in your enjin site -->
-  <Features>
-    <ShopItemFeatures EnjinItemId="3024925" DisableBroadcast="false"> <!-- EnjinItemId is ID of your Enjin donation store item -->
+  <Packages>
+    <Package EnjinItemId="3024925" DisableBroadcast="false"> <!-- EnjinItemId is ID of your Enjin donation store item -->
       <AddGroups>
         <GroupID>star</GroupID> <!-- Rocket permissions group ID to be added for player -->
       </AddGroups>
@@ -49,7 +49,7 @@ You can download `WebDonationsToEnjinAutoDonator.zip` in the releases that has e
         <Command>/airdrop</Command> <!-- Any command to execute, can use variables {steamid} and {steamname} -->
       </Commands>
       <UconomyMoney>300</UconomyMoney> <!-- Amount of money to be paid to player via Uconomy, make 0 to not pay any money --> 
-    </ShopItemFeatures>
-  </Features>
+    </Package>
+  </Packages>
 </EnjinAutoDonatorConfiguration>
 ```

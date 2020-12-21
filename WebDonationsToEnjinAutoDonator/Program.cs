@@ -90,7 +90,7 @@ namespace WebDonationsToEnjinAutoDonator
                         }
                     } else
                     {
-                        command.Replace("{steamid}", "{steamid}", StringComparison.OrdinalIgnoreCase);
+                        commands.Add(command.Replace("{steamid}", "{steamid}", StringComparison.OrdinalIgnoreCase));
                     }
                 }
 

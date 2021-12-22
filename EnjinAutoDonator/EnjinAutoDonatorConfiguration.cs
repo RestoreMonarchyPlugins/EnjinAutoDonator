@@ -10,7 +10,7 @@ namespace EnjinAutoDonator
         public string ServerIdentifier { get; set; }
         public string WebsiteUrl { get; set; }
         public string APIKey { get; set; }
-        public int PresetId { get; set; }
+        public string PresetId { get; set; }
 
         public string DiscordWebhookUrl { get; set; }
         public string DiscordWebhookColor { get; set; }

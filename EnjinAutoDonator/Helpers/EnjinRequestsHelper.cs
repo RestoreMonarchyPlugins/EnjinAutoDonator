@@ -26,13 +26,19 @@ namespace EnjinAutoDonator.Helpers
                 parameters = new EnjinRequestBody.Params()
                 {
                     api_key = pluginInstance.Configuration.Instance.APIKey,
-                    preset_id = pluginInstance.Configuration.Instance.PresetId.ToString(),
+                    preset_id = pluginInstance.Configuration.Instance.PresetId,
                     date_start = epoch.ToString()
                 },
                 method = "Shop.getPurchases"
             };
 
             var response = httpClient.SendRequest(body);
+
+            if (response["error"] != null)
+            {
+                Logger.LogError($"Enjin API Error: {response["error"]["message"]}");
+                return null;
+            }
 
             if (response["id"].ToString() != body.id)
             {

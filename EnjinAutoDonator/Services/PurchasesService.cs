@@ -103,7 +103,14 @@ namespace EnjinAutoDonator.Services
 
             bool flag = Database.ContainsPurchase(result["purchase_date"].ToObject<int>(), item["item_id"].ToObject<int>());
 
-            string steamIdStr = item["variables_names"][pluginInstance.Configuration.Instance.SteamIDIdentifier].ToString();            
+            JToken steamIdVar = item["variables_names"][pluginInstance.Configuration.Instance.SteamIDIdentifier];
+            if (steamIdVar == null)
+            {
+                Logger.LogError($"{item["item_name"]} doesn't have required '{pluginInstance.Configuration.Instance.SteamIDIdentifier}' variable!");
+                return;
+            }
+
+            string steamIdStr = steamIdVar.ToString();            
 
             string steamName = null;
             if (ulong.TryParse(steamIdStr, out ulong steamId))

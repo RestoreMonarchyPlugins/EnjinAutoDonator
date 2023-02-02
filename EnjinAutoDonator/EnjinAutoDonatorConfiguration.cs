@@ -38,7 +38,7 @@ namespace EnjinAutoDonator
             ServerIdentifier = "PVP1";
             WebsiteUrl = "http://www.yourwebsite.enjin.com/";
             APIKey = "APIKEY";
-            PresetId = 248723;
+            PresetId = "248723";
 
             DiscordWebhookUrl = "";
             DiscordWebhookColor = "#843da4";
